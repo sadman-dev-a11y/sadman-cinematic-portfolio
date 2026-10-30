@@ -25,3 +25,7 @@
 The preview browser disables WebGL. The SVG fallback was visually verified, and the Three.js scene compiled successfully; actual GPU rendering could not be visually checked in this environment. Pointer/coarse and reduced-motion guards are implemented. No physical Safari/Android testing, Lighthouse score or formal WCAG certification is claimed. Existing public social links and the user-supplied Medium destination are retained; external content availability is outside the portfolio.
 
 GitHub and Sites publication results are provided in the final handover. The rollback branch is `backup/pre-cinematic-v2`.
+
+## Deployment cache correction
+
+The first live refresh reused the previously cached interface script. The build now writes content-hashed interface and optional-scene chunks and updates the HTML reference automatically. This keeps page markup and behavior on the same source version.

@@ -34,3 +34,5 @@ See `VALIDATION.md` for the actual checks performed and remaining verification l
 - Project cards support category filters, device-inspired graphics and animated detail panels with brief descriptions. The graphics are original illustrations, not application screenshots.
 
 `backup/pre-cinematic-v2` preserves the original public GitHub source before this upgrade. Source content, ten certificate originals and previews, portrait, résumé, public contact links and the corrected Medium article URL are retained.
+
+The production build also bundles the core interface into `dist/runtime/interface-<hash>.js` and splits the optional scene into a separately hashed chunk. The HTML entry is updated automatically, preventing browsers from mixing a new page with a cached older interface. `dist/runtime/` is generated and excluded from source control. Run `npm run build` after editing interface source before refreshing the local preview.
