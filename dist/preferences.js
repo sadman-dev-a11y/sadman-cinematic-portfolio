@@ -1,0 +1,5 @@
+const systemMotion=matchMedia('(prefers-reduced-motion: reduce)'),events=new EventTarget();let userReduced=false;
+try{userReduced=localStorage.getItem('sadman-motion')==='reduced';}catch{}
+export const motionPreference={get matches(){return userReduced||systemMotion.matches;},addEventListener:(...args)=>events.addEventListener(...args),removeEventListener:(...args)=>events.removeEventListener(...args)};
+function update(){document.documentElement.dataset.motion=motionPreference.matches?'reduced':'full';const button=document.querySelector('#motion-toggle');if(button){button.setAttribute('aria-pressed',String(motionPreference.matches));button.setAttribute('aria-label',motionPreference.matches?'Reduced motion enabled':'Reduce animations');button.textContent=motionPreference.matches?'Motion low':'Motion full';}events.dispatchEvent(new Event('change'));}
+const button=document.querySelector('#motion-toggle');button?.addEventListener('click',()=>{userReduced=!motionPreference.matches;try{localStorage.setItem('sadman-motion',userReduced?'reduced':'system');}catch{}update();});systemMotion.addEventListener('change',update);update();

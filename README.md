@@ -1,10 +1,10 @@
 # Sadman — cinematic portfolio
 
-Responsive static portfolio with a real portrait, 60-second introduction, two project case studies, research and ten authentic certificate documents. No framework runtime or third-party JavaScript dependencies. Native CSS and IntersectionObserver animate the sections; Web Audio generates original interaction sounds after opt-in. Native dialogs provide keyboard focus containment and restore focus after closing.
+Responsive static portfolio with a real portrait, 60-second introduction, two project case studies, research and ten authentic certificate documents. Native ES modules, CSS and the Web Animations API handle the main interface. A lazily loaded Three.js lens sculpture adds optional WebGL graphics. Web Audio generates quiet interaction sounds after opt-in; native dialogs retain keyboard focus and return it after closing.
 
 ## Run and verify
 
-Node 22+ is recommended. `npm ci`, `npm run check`, and `npm run build`. Serve `dist/` through any local static HTTP server (for example `python3 -m http.server 8000 --directory dist`). Do not open the HTML directly via file://; the data uses ES modules.
+Node 22+ is recommended. `npm ci`, `npm run build`, and `npm run check`. Serve `dist/` through any local static HTTP server (for example `python3 -m http.server 8000 --directory dist`). Do not open the HTML directly via file://; the data uses ES modules.
 
 ## Update content
 
@@ -23,3 +23,14 @@ The original CV, private phone and reference contacts are excluded. Certificates
 ## Validation
 
 See `VALIDATION.md` for the actual checks performed and remaining verification limits. No license grant has been added to the personal media or source.
+
+## Cinematic 2.0
+
+- `dist/motion.css` and `dist/motion.js`: name masks, lighting, particles, scroll reveals, active navigation, magnetic buttons, card tilt, ripples, custom cursor and offscreen animation pausing.
+- `src/scene.js`: original lens sculpture built from simple geometry. `scripts/build.mjs` bundles it locally with esbuild into `dist/scene.js`; the bundle is generated, not committed. Three.js uses a WebGL2 context created only after idle time and viewport visibility. Data saver and devices reporting 2 GB RAM or less use the SVG fallback. Context failure also leaves the SVG intact.
+- `dist/preferences.js`: system reduced-motion support plus a persistent Motion low control. Pointer effects are disabled for coarse pointers and reduced motion.
+- `dist/player.js`: custom play/pause, seeking, time, mute, volume and fullscreen controls, retaining the original MP4 and soundtrack. Browsers that deny native fullscreen use an accessible theater view with Escape exit, focus containment and background inertness. Native controls remain available when JavaScript is absent.
+- Certificates support grid/filmstrip layouts, existing search/category filters, next/previous controls, arrow-key navigation, fit-to-view, zoom, touch swipes and original documents.
+- Project cards support category filters, device-inspired graphics and animated detail panels with brief descriptions. The graphics are original illustrations, not application screenshots.
+
+`backup/pre-cinematic-v2` preserves the original public GitHub source before this upgrade. Source content, ten certificate originals and previews, portrait, résumé, public contact links and the corrected Medium article URL are retained.
