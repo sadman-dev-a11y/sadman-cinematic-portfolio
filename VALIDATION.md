@@ -45,3 +45,9 @@ No Lighthouse, field Core Web Vitals, automated accessibility score, cross-brows
 - Playback preview: video play set `data-page-paused=true`; artwork computed animation state `paused`.
 - Responsive 390px preview: all 14 line wrappers present, no horizontal document overflow, six mobile menu links available, manual reduced motion applied. Width checks at 320, 390, 768 and 1440px are recorded in the task handover after the final build.
 - Touch feedback uses standard pointer events shared by mouse/touch; no hover is required. Actual iOS/Android touch gestures and device frame rates were not measured. No additional Lighthouse scores are claimed.
+
+## Intro motion graphic and typography — 2 November 2026
+
+The intro section now has a decorative original SVG film/aperture composition with rotating rings, floating tiles and a scanning line. Headline, body, eyebrow and chapter link sizes increased within this section only. The intro headline no longer depends on the legacy clip-mask reveal; its resting opacity is 1 and clip-path is none.
+
+Build, source checks and whitespace checks passed. Preview checks at 320, 390, 768, 1440 and 1920px found no document overflow; the headline computed opacity 1 / clip-path none at every width. The orbit computed `intro-turn` / `running` in full motion. Reduced-motion and offscreen pause styles are included; physical mobile frame rates are unmeasured. Gmail contact destination and original content/media remain unchanged.
