@@ -14,6 +14,14 @@ fs.writeFileSync(htmlPath,page);
 // All paths are relative so both root hosting and GitHub Pages subpaths work.
 // Only the optional 3D scene is bundled; core content and navigation remain lightweight ES modules.
 if(!fs.existsSync('dist/index.html')) throw Error('Missing static entrypoint');
+// A content hash invalidates cached styling after each visual release.
+for(const file of fs.readdirSync('dist'))if(/^portfolio-.*\.css$/.test(file))fs.rmSync('dist/'+file);
+const styles=await build({entryPoints:['dist/design.css'],bundle:true,minify:true,target:'es2020',outdir:'dist',entryNames:'portfolio-[hash]',external:['*.woff'],metafile:true});
+const stylesheet=Object.entries(styles.metafile.outputs).find(([,output])=>output.entryPoint==='dist/design.css')?.[0];
+if(!stylesheet)throw Error('Missing versioned stylesheet');
+let styledPage=fs.readFileSync(htmlPath,'utf8').replace(/<link rel="stylesheet" href="(?:style\.css|motion\.css|directors-cut\.css|portfolio-[^"]+\.css)">/g,'');
+styledPage=styledPage.replace('</head>',`<link rel="stylesheet" href="${stylesheet.replace(/^dist\//,'')}"></head>`);
+fs.writeFileSync(htmlPath,styledPage);
 const origin=process.env.PUBLIC_SITE_URL;
 if(origin){const url=new URL(origin.endsWith('/')?origin:origin+'/');const path='dist/index.html';let html=fs.readFileSync(path,'utf8').replace(/<link rel="canonical"[^>]*>/g,'').replace(/<meta property="og:url"[^>]*>/g,'').replace(/<meta property="og:image"[^>]*>/g,'');html=html.replace('</head>',`<link rel="canonical" href="${url.href}"><meta property="og:url" content="${url.href}"><meta property="og:image" content="${new URL('assets/portrait.webp',url).href}"></head>`);fs.writeFileSync(path,html);fs.writeFileSync('dist/sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${url.href}</loc></url></urlset>`);fs.writeFileSync('dist/robots.txt',`User-agent: *\nAllow: /\nSitemap: ${new URL('sitemap.xml',url).href}\n`)}
 console.log('Static portfolio ready in dist/');

@@ -1,31 +1,38 @@
-# Cinematic 2.0 validation — 30 October 2026
+# Director’s Cut 3.0 validation
 
-## Automated checks
+Validated 2 November 2026 (Asia/Dhaka) against source baseline `1898c48c4e039a437310eb144e309937e7020377`.
 
-- Clean `npm ci --ignore-scripts`, production build and source checks passed. The production workflow uses ordinary `npm ci`, builds the optional scene, checks all modules and media, then deploys through GitHub Pages.
-- All ten unique credential records, their original documents and previews, portrait, reel, résumé and local document links remain present. Source media were not modified.
-- The corrected Medium article URL remains `https://medium.com/@slcstamdford/20da0633d5d4`.
-- No new private CV contacts, analytics or secrets were added.
-- Three.js 0.187.0 and esbuild 0.28.2 are pinned. The optional scene bundle measured 545,380 bytes / 137,130 gzip bytes in the local production build. It is requested only after an idle/visibility check and a successful WebGL2 capability check.
+## Commands actually run
 
-## Browser checks
+- `npm ci`: passed; dependencies installed from the existing lockfile.
+- `PUBLIC_SITE_URL=https://sadman-dev-a11y.github.io/sadman-cinematic-portfolio/ npm run build`: passed. One minified content-hashed CSS entry and a hashed JS entry are emitted; optional Three.js remains split/lazy.
+- `npm run check`: passed. Syntax, ten unique certificate records, every preview/original asset, two projects, local HTML links, public email/privacy exclusions, six chapters, hashed CSS reference and supplied Medium URL were checked.
+- `git diff --check`: passed.
+- An invalid existing hover media-query spacing was detected by CSS bundling and corrected; the final build has no CSS syntax warning.
 
-- Project filtering to Android showed one project; its animated detail panel contained the existing brief description. Escape dismissal worked.
-- Certificate search and AI filtering returned the expected Claude entry; resetting restored all ten cards.
-- Grid/filmstrip switching, horizontal gallery scrolling, previous/next controls, ArrowRight navigation, original document links, 125% zoom and Escape dismissal passed. The full document fits the initial viewer; zoom increases the sheet size for scrolling.
-- Mobile menu opens and closes after navigation. A filmstrip measured 3,095 px of content within a 375 px page without causing page overflow.
-- Responsive iframe checks at 320, 375, 390, 768, 1024 and 1440 px passed with ten credential cards. Actual inner content widths were 305, 360, 375, 753, 1009 and 1425 px after scrollbar space; page content width matched each viewport. These are responsive checks, not physical-device tests.
-- Custom video playback advanced beyond nine seconds with a 60-second duration and no media error. Pause, seek to 59.9 seconds and video mute passed.
-- This browser denies native fullscreen. The theater fallback passed: its controls remain accessible, background content becomes inert, Tab wraps inside the player and Escape exits.
-- Motion low toggled the persistent reduced-motion state and revealed all content without motion. System prefers-reduced-motion uses the same preference pathway and has CSS fallbacks.
-- Web Audio reached the running state after interaction. Mute and quiet event envelopes are implemented; subjective audio quality was not independently audited.
+## Browser checks actually performed
+
+Chrome through the supported Sites preview. Desktop visual inspection at the browser’s approximately 1360px viewport; a same-origin responsive iframe exercised 320, 360, 375, 390, 430, 768, 1024, 1440 and 1920px viewports. Every viewport reported document scroll width equal to its client width (stable scrollbars reserve 15px). The 390px portrait/name composition was visually inspected; the 320px headline masks had no internal horizontal clipping. These checks do not simulate real phone hardware, touch input or GPU performance.
+
+Passed interaction checks:
+
+- Project detail opens at `#project/cinedesk`; browser Back closes it and restores focus to its trigger.
+- Android project filter shows only Film & Media Studies; All restores both.
+- Certificate search for Claude yields one record; an unmatched query shows the empty state.
+- Education category yields three records; filmstrip layout activates.
+- Certificate viewer opens, zoom reaches 125%, original Claude PDF URL is retained, and Next moves from Saylor to Basics of Artificial Intelligence. Escape dismissal exercised.
+- Manual reduced motion sets the root preference to reduced; all reveal content remains readable.
+- Sound toggle changes pressed state and was returned to off. No audio starts on page load.
+- Original video plays and sets the watching state; pause clears it. The theater fallback opens and exits successfully. Ambient CSS and WebGL animation are wired to pause during playback.
+- Mobile menu opens via keyboard, marks main content inert, focuses its first link, wraps Shift+Tab to the menu control, and restores focus/unlocks content on Escape.
+- Production stylesheet loads by its content-hashed path with no desktop document overflow.
+
+## Integrity
+
+No media assets, certificate records/originals, résumé facts, contact destination, social URLs, or supplied Medium article URL were changed. The original MP4 was not recompressed. Interface illustrations are explicitly labeled decorative. No framework or runtime dependency was added.
+
+Backup branch: `backup/pre-directors-cut-2026-11-02`.
 
 ## Verification limits
 
-The preview browser disables WebGL. The SVG fallback was visually verified, and the Three.js scene compiled successfully; actual GPU rendering could not be visually checked in this environment. Pointer/coarse and reduced-motion guards are implemented. No physical Safari/Android testing, Lighthouse score or formal WCAG certification is claimed. Existing public social links and the user-supplied Medium destination are retained; external content availability is outside the portfolio.
-
-GitHub and Sites publication results are provided in the final handover. The rollback branch is `backup/pre-cinematic-v2`.
-
-## Deployment cache correction
-
-The first live refresh reused the previously cached interface script. The build now writes content-hashed interface and optional-scene chunks and updates the HTML reference automatically. This keeps page markup and behavior on the same source version.
+No Lighthouse, field Core Web Vitals, automated accessibility score, cross-browser/device lab, real touch gestures, or measured frame-rate results are claimed. No new performance scores were invented. OS-level reduced motion, native fullscreen on physical devices and WebGL on low-end hardware require device-level checks. External Medium/LinkedIn destinations were preserved; their service availability was not independently certified. The GitHub Actions build and Pages deployment must also succeed; their status is reported in the handover.
