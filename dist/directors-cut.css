@@ -21,3 +21,73 @@ body.menu-open{overflow:hidden}.detail-copy .detail-scope+h3{margin-top:0}.hero-
 @media(max-width:360px){#intro h2{font-size:43px}.intro-motion{padding:12px}.intro-graphic-label{font-size:6px}.intro-live{font-size:6px}.intro-disciplines{font-size:7px}#intro .intro-aside p{font-size:17px}#intro .chapter-index a{font-size:14px}}
 @media(prefers-reduced-motion:reduce){#intro .intro-motion *{animation:none!important}}[data-motion=reduced] #intro .intro-motion *{animation:none!important}
 #intro .chapter-index{background:transparent;padding:0;height:auto;min-height:0;border-bottom:0;position:static;visibility:visible;opacity:1;translate:none;pointer-events:auto}
+
+/* Finishing pass: readable supporting copy and consistent interaction surfaces. */
+::selection{background:#cab4f1;color:#090710}
+.section{scroll-margin-top:80px}
+.section-top>p,.project-body p,.research-intro{line-height:1.75}
+.section-top>p{font-size:15px;max-width:38ch}
+.project-body p{font-size:16px;max-width:40ch}
+.timeline p{font-size:15px;line-height:1.7}
+.skill-groups p{font-size:14px!important;line-height:1.85}
+.certificate-card h3{line-height:1.35;letter-spacing:-.02em}
+.certificate-card p{font-size:13px;line-height:1.6;color:#62546f}
+.certificate-category{font-size:10px;line-height:1.5}
+.gallery-note,.result-status{font-size:12px;line-height:1.7}
+.search input{font-size:16px}
+.search{border-radius:4px;transition:border-color .2s,box-shadow .2s}
+.search:focus-within{border-color:#5900c5;box-shadow:0 0 0 3px #5900c515}
+.button,.filters button,.gallery-view button,.project-filters button{transition:background .2s,color .2s,border-color .2s,box-shadow .2s}
+.filters button,.gallery-view button,.gallery-arrows button{min-height:44px}
+.primary{box-shadow:0 8px 24px #5900c526}
+.text-link,.project-button,.contact-button{text-underline-offset:6px}
+.certificate-image{transition:background .3s,border-color .3s,box-shadow .3s;overflow:hidden}
+.certificate-card:focus-visible .certificate-image{border-color:#5900c5;box-shadow:0 0 0 3px #5900c51a}
+:where(a,button,input,select,summary):focus-visible{outline:2px solid #b58aff;outline-offset:5px}
+:where(.credentials,.about,#intro) :where(a,button,input):focus-visible{outline-color:#5900c5}
+.project-visual{outline:1px solid #ffffff10;outline-offset:-1px}
+.project-body h3,.article h3,.timeline h3{text-wrap:balance}
+.contact-button{position:relative;isolation:isolate}
+.contact-button:before{content:'';position:absolute;inset:0 -14px;z-index:-1;background:#ffffff0d;opacity:0;transition:opacity .25s}
+.contact-button:focus-visible:before{opacity:1}
+.socials a{min-height:44px;display:inline-flex;align-items:center}
+@media(hover:hover) and (pointer:fine){
+.primary:hover{background:#701bdb;box-shadow:0 10px 30px #5900c53a}
+.certificate-card:hover .certificate-image{background:#e3dbea;border-color:#5900c538;box-shadow:0 14px 30px -18px #32125055}
+.contact-button:hover:before{opacity:1}
+.socials a:hover{color:#e6d8ff}
+}
+@media(min-width:601px) and (max-width:850px){
+.project,.project:nth-child(even){grid-template-columns:1fr;gap:16px}
+.project:nth-child(even) .project-visual{order:0}
+.project-body{padding:18px 0 28px}
+.project-body p{max-width:60ch}
+.project-button{max-width:100%}
+.project-visual{min-height:420px}
+.project .project-headline{font-size:44px!important;max-width:70%}
+.browser-art{width:240px;right:40px}
+.research{grid-template-columns:1fr;gap:32px}
+.research h2{font-size:clamp(55px,9vw,76px)}
+}
+@media(max-width:600px){
+.section{scroll-margin-top:70px}
+.section-top>p{font-size:14px;line-height:1.7}
+.project-body p,.research-intro,.timeline p{font-size:15px;line-height:1.75}
+.skill-groups p{font-size:13px!important}
+.certificate-card h3{font-size:16px}
+.certificate-card p{font-size:12px}
+.certificate-category{font-size:9px}
+.gallery-tools{align-items:stretch}
+.filters{flex-wrap:wrap}
+.filters button{min-height:44px;font-size:11px}
+.gallery-note{font-size:12px}
+.contact-bottom .socials{gap:12px 22px}
+}
+@media(max-width:420px){
+.certificate-grid{grid-template-columns:minmax(0,1fr);gap:30px}
+.certificate-image{height:245px;padding:22px}
+.certificate-card h3{font-size:19px}
+.certificate-category{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){.certificate-image,.contact-button:before,.button,.search{transition:none}}
+[data-motion=reduced] :is(.certificate-image,.contact-button:before,.button,.search){transition:none}
