@@ -46,3 +46,9 @@ The mobile menu uses background inertness, scroll locking, a Tab loop, Escape di
 To update project scope, edit `openProject` in `dist/app.js`; it deliberately lists only capabilities already stated in the verified descriptions. To extend the project set, add a stable unique slug in `projectSlug` as well as its content record. Certificate data and originals are unchanged; existing filters, search, filmstrip, keyboard/swipe navigation and zoom remain available.
 
 No new runtime dependency or framework was added. The original showreel and soundtrack are unchanged. Interface sound remains opt-in and is suppressed during video playback. Metrics in the original brief remain goals; see `VALIDATION.md` for what was actually measured.
+
+## Touch and desktop choreography
+
+`dist/choreography.js` adds selectable line reveals to section headings, viewport-triggered staggered certificate/timeline/toolkit/chapter reveals, gently floating project illustrations, scroll depth on artwork, staggered mobile menu links and pointer/keyboard press feedback. These effects run without hover; hover remains an extra desktop enhancement. The existing scroll frame updates only currently visible artwork. Gallery changes register new cards and release removed ones.
+
+No content is hidden as a prerequisite for JavaScript animation. Reveals play once as elements enter the viewport; transforms and opacity avoid layout changes. Animations pause during showreel playback and hidden tabs, cancel on reduced motion, and leave content in its readable resting state. Continuous CSS motion is limited to visible project art and the contact arrow. No new dependency was added. Physical touch-device testing remains separate from responsive browser checks.

@@ -36,3 +36,12 @@ Backup branch: `backup/pre-directors-cut-2026-11-02`.
 ## Verification limits
 
 No Lighthouse, field Core Web Vitals, automated accessibility score, cross-browser/device lab, real touch gestures, or measured frame-rate results are claimed. No new performance scores were invented. OS-level reduced motion, native fullscreen on physical devices and WebGL on low-end hardware require device-level checks. External Medium/LinkedIn destinations were preserved; their service availability was not independently certified. The GitHub Actions build and Pages deployment must also succeed; their status is reported in the handover.
+
+## Additional cross-device animation pass — 2 November 2026
+
+- Added heading line reveals, scroll-triggered stagger, artwork float/depth, menu link stagger, pointer/touch feedback and keyboard press feedback in `dist/choreography.js`.
+- `npm run build`, `npm run check` (including syntax of the new module) and `git diff --check` passed.
+- Desktop preview: all seven section headings received readable line wrappers (14 lines); project filtering remained functional; Gmail compose destination remained intact. Full-motion artwork computed `device-breathe`; reduced motion computed no float animation.
+- Playback preview: video play set `data-page-paused=true`; artwork computed animation state `paused`.
+- Responsive 390px preview: all 14 line wrappers present, no horizontal document overflow, six mobile menu links available, manual reduced motion applied. Width checks at 320, 390, 768 and 1440px are recorded in the task handover after the final build.
+- Touch feedback uses standard pointer events shared by mouse/touch; no hover is required. Actual iOS/Android touch gestures and device frame rates were not measured. No additional Lighthouse scores are claimed.

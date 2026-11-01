@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "node --check dist/app.js && node --check dist/content.js && node --check dist/motion.js && node --check dist/player.js && node --check dist/preferences.js && node --check src/scene.js && node scripts/check.mjs"
+    "check": "node --check dist/app.js && node --check dist/content.js && node --check dist/motion.js && node --check dist/choreography.js && node --check dist/player.js && node --check dist/preferences.js && node --check src/scene.js && node scripts/check.mjs"
   },
   "devDependencies": {
     "esbuild": "0.28.2",
