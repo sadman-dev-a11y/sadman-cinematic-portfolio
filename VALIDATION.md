@@ -51,3 +51,16 @@ No Lighthouse, field Core Web Vitals, automated accessibility score, cross-brows
 The intro section now has a decorative original SVG film/aperture composition with rotating rings, floating tiles and a scanning line. Headline, body, eyebrow and chapter link sizes increased within this section only. The intro headline no longer depends on the legacy clip-mask reveal; its resting opacity is 1 and clip-path is none.
 
 Build, source checks and whitespace checks passed. Preview checks at 320, 390, 768, 1440 and 1920px found no document overflow; the headline computed opacity 1 / clip-path none at every width. The orbit computed `intro-turn` / `running` in full motion. Reduced-motion and offscreen pause styles are included; physical mobile frame rates are unmeasured. Gmail contact destination and original content/media remain unchanged.
+
+## Depth 3.1 — 14 November 2026
+
+Commands run: `npm ci`, `npm run build`, `npm run check` (both PASS lines).
+
+Browser checks run in headless Chrome with software WebGL (SwiftShader), not on physical devices:
+
+- Viewports 1920, 1440, 1280, 1024, 768, 430, 390, 360 and 320px: document scroll width equals client width, no console or page errors, all three stages reach `webgl-ready`.
+- No visible text below 10px at any of those widths (10px remains only on the rotated portrait caption and three tracked uppercase labels on phones).
+- Emulated touch at 390px: a horizontal drag on the film strip scrubs it without changing the page scroll position; the mobile menu opens and navigates; a project dialog opens above the canvas and closes; project cards receive scroll-linked tilt; the Motion control removes the canvas and restores it.
+- Desktop mouse: tapping the lens closes and opens the aperture; dragging turns it.
+
+Not verified: frame rate, battery use or thermal behaviour on real phones; iOS Safari; device-tilt input (no sensor in the test browser); low-end GPUs. Test these on hardware before treating the 3D as final.

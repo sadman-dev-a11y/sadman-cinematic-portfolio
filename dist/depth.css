@@ -1,0 +1,84 @@
+/* Depth layer 3.1: shared WebGL stages, touch-friendly CSS 3D, legibility floor and simplified header. */
+
+/* ---- Shared WebGL canvas and stages ---- */
+.depth-canvas{position:absolute;top:0;left:0;z-index:6;display:block;pointer-events:none;will-change:transform}
+[data-stage]{touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+[data-stage].is-grabbed{cursor:grabbing}
+[data-motion=reduced] [data-stage]{cursor:auto}
+@media print{.depth-canvas{display:none}}
+
+/* Hero lens sits on the portrait's lower-left corner; depth.js measures the portrait and sets --ph-*. */
+.hero-lens{--size:270px;pointer-events:auto;width:var(--size);height:var(--size);left:calc(var(--ph-l,54%) - var(--size) * .5);top:calc(var(--ph-b,70%) - var(--size) * .56);right:auto;bottom:auto;opacity:1;filter:none;z-index:3}
+.hero-lens:before{inset:12%}
+.hero-lens .lens-fallback{width:100%;height:100%;padding:16%}
+.hero-lens .lens-caption{font-size:10px;letter-spacing:.16em;bottom:-4px;white-space:nowrap;opacity:0;transition:opacity .6s .4s}
+.hero-lens.webgl-ready .lens-caption{opacity:.85}
+@media(min-width:1600px){.hero-lens{--size:320px}}
+@media(max-width:1100px){.hero-lens{--size:220px}}
+@media(max-width:850px){.hero-lens{--size:190px}}
+@media(max-width:600px){.hero-lens{--size:150px;left:calc(var(--ph-r,94%) - var(--size) + 10px);top:calc(var(--ph-b,478px) - var(--size) + 6px)}.hero-lens .lens-caption{display:none}}
+
+/* Film strip above the project list. */
+.stage-strip{position:relative;height:clamp(120px,15vw,210px);margin:-14px calc(var(--gutter) * -1) 30px}
+.stage-strip:before{content:'';position:absolute;inset:26% 0;background:repeating-linear-gradient(90deg,#2b1653 0 132px,#0d0718 132px 140px);border-block:9px dashed #4a2f7c66;opacity:.45;transition:opacity .7s}
+.stage-strip.webgl-ready:before{opacity:0}
+
+/* Gimbal beside the contact headline. */
+.stage-orbit{position:absolute;z-index:2;right:var(--gutter);top:50%;translate:0 -56%;width:min(33vw,480px);aspect-ratio:1}
+.contact:has(.stage-orbit.webgl-ready):after{opacity:0}
+.contact h2,.contact .eyebrow,.contact-lede,.contact-button{position:relative;z-index:1}
+@media(max-width:850px){.stage-orbit{position:relative;right:auto;top:auto;translate:none;width:min(58vw,250px);margin:10px 0 0 -12px}}
+
+/* ---- CSS 3D that works without hover ---- */
+.project-visual{transform:perspective(1100px) rotateX(calc(var(--rx,0) * 1deg)) rotateY(calc(var(--ry,0) * 1deg));transition:transform .32s cubic-bezier(.2,.7,.2,1),clip-path 1s var(--ease-out);will-change:transform}
+.project-visual .device-art{translate:calc(var(--ry,0) * -2.4px) calc(var(--scroll-drift,0px) + var(--rx,0) * 2.4px)}
+.project-visual .project-wordmark,.project-visual .project-headline{translate:calc(var(--ry,0) * 1.3px) calc(var(--rx,0) * -1.3px);transition:translate .32s cubic-bezier(.2,.7,.2,1)}
+.cinema.depth-tilt{transform:perspective(1300px) rotateX(calc(var(--cine,0) * 15deg)) scale(calc(1 - var(--cine,0) * .06));transform-origin:50% 100%;will-change:transform}
+.cinema.theater-mode,.cinema:fullscreen{transform:none!important}
+[data-motion=reduced] .project-visual,[data-motion=reduced] .cinema{transform:none!important}
+[data-motion=reduced] .project-visual :is(.device-art,.project-wordmark,.project-headline){translate:none!important}
+@media(prefers-reduced-motion:reduce){.project-visual,.cinema{transform:none!important}.project-visual :is(.device-art,.project-wordmark,.project-headline){translate:none!important}}
+
+/* ---- Header, contact and footer ---- */
+@media(min-width:851px){header nav{gap:30px;align-items:center}header nav a{font-size:14px}header nav a:last-child{border:1px solid #ffffff3d;border-radius:40px;padding:10px 18px;transition:background .2s,border-color .2s,color .2s}header nav a:last-child:hover,header nav a:last-child.active{background:var(--purple);border-color:var(--purple);color:#fff}header nav a:last-child:after{display:none}header nav a:last-child span{margin-left:8px;color:inherit}}
+.hero-description{font-size:18px!important;max-width:31em;color:#e4dfec}
+.hero-description>span{display:block;margin-top:10px;font-size:14px;color:#b3a8c2}
+.contact-lede{max-width:44ch;margin-top:26px;font-size:18px;line-height:1.6;color:#eadfff}
+.email-actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px 24px}
+.gmail-link{display:inline-flex;align-items:center;min-height:40px;color:#dac5f4}
+.footer-controls{display:flex;align-items:center;gap:18px}
+.project-plain{padding:22px 0;border-top:1px solid #ffffff20}.project-plain a{text-decoration:underline}
+
+/* ---- Legibility floor: nothing readable below 11px ---- */
+.eyebrow{font-size:12px}
+.hero .eyebrow{font-size:11px;max-width:none}
+.hero .hero-intro{font-size:11px}
+.button,.hero .button{font-size:14px}
+.play-link{font-size:14px}.play-link small{font-size:11px}
+.hero-footer{font-size:11px}
+.hero .portrait-caption{font-size:10px}
+.film-caption{font-size:11px}
+.section-top>p{font-size:15px}
+.column-label{font-size:12px}
+.text-link{font-size:14px}
+.filters button,.project-filters button,.gallery-view button{font-size:13px}
+.contact-bottom button,.gmail-link{font-size:13px}
+.sound,.motion-toggle{font-size:12px}
+footer>span,footer>a:last-child{font-size:11px}
+@media(max-width:600px){
+ .hero .eyebrow{font-size:10px;letter-spacing:.08em}
+ .hero-description{font-size:16px!important}
+ .hero-description>span{display:none}
+ .hero .button{font-size:13px}
+ .hero-footer{font-size:10px}
+ .hero-footer>span{max-width:none}
+ .contact-lede{font-size:16px;margin-top:18px}
+ footer{justify-content:space-between}
+ .footer-controls{order:3;width:100%;justify-content:space-between;border-top:1px solid #ffffff18;padding-top:14px}
+}
+.visual-note,.visual-note span,.project-meta,.reel-play small,.timeline article>span,.timeline small,.article-top,.article-top span,.certificate-category,.certificate-category span{font-size:11px!important}
+.reel-controls span,.reel-controls button,.skill-row>span,.interest-tags span,.result-status,.skill-groups h4{font-size:12px!important}
+@media(max-width:600px){.intro .eyebrow{font-size:11px}.hero .play-link{font-size:13px}}
+/* Between phone and wide desktop the text column runs up to the portrait: keep copy clear of it and move the lens to the portrait's outer corner. */
+@media(min-width:601px) and (max-width:1100px){.hero-lens{left:calc(var(--ph-r,94%) - var(--size) + 14px);top:calc(var(--ph-b,70%) - var(--size) * .5)}.hero-description{max-width:calc(var(--ph-l,54%) - var(--gutter) - 24px)}}
+@media(max-width:600px){.intro .eyebrow{font-size:11px!important}}

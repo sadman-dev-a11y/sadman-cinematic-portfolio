@@ -2,6 +2,7 @@ import {profile,projects,certificates} from './content.js';
 import {motionPreference} from './preferences.js';
 import {setupPlayer} from './player.js';
 import {setupMotion,animateIn} from './motion.js';
+import {setupDepth} from './depth.js';
 const $=s=>document.querySelector(s),reduced=()=>motionPreference.matches;
 let soundOn=false,audio,master,filmPlaying=false,lastSound=-Infinity,voices=0;
 try{soundOn=localStorage.getItem('sadman-sound')==='on'}catch{}
@@ -45,5 +46,6 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('nav').classList.
 setupPlayer({onPlayback:value=>{if(filmPlaying===value)return;filmPlaying=value;document.body.classList.toggle('is-watching',value);document.dispatchEvent(new CustomEvent('portfolio:playback',{detail:{playing:value}}));},toast});
 $('#copy-email').onclick=async()=>{try{await navigator.clipboard.writeText(profile.email);toast('Email address copied');tone('success');}catch{toast('Copy unavailable. Use the email link to get in touch.');}};
 setupMotion({tone});
+setupDepth();
 
 syncProjectRoute();
