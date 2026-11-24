@@ -82,3 +82,32 @@ footer>span,footer>a:last-child{font-size:11px}
 /* Between phone and wide desktop the text column runs up to the portrait: keep copy clear of it and move the lens to the portrait's outer corner. */
 @media(min-width:601px) and (max-width:1100px){.hero-lens{left:calc(var(--ph-r,94%) - var(--size) + 14px);top:calc(var(--ph-b,70%) - var(--size) * .5)}.hero-description{max-width:calc(var(--ph-l,54%) - var(--gutter) - 24px)}}
 @media(max-width:600px){.intro .eyebrow{font-size:11px!important}}
+
+/* Auteur preparation: readable interface, touch targets and calmer responsive motion. */
+:root{scroll-padding-top:clamp(72px,8vh,92px)}
+:where(.project-button,.play-link,.text-link,.contact-bottom button,.footer-controls button,.gallery-arrows button,.viewer-tools button,.viewer-tools a,.reel-controls button){min-height:44px}
+.project-button,.play-link,.text-link{align-content:center}
+.viewer-tools button,.gallery-arrows button,.reel-controls button{min-width:44px}
+.reel-controls input{min-height:32px}
+.reel-controls #reel-time{font-size:12px!important}
+#intro .intro-graphic-label,#intro .intro-disciplines{font-size:11px;letter-spacing:.07em;flex-wrap:wrap}
+#intro .intro-live{font-size:11px;letter-spacing:.07em}
+.gallery-note,.result-status,.certificate-card p{font-size:14px!important;line-height:1.6}
+.project-body p,.timeline p,.research-intro{font-size:clamp(16px,1.15vw,18px);line-height:1.7}
+.certificate-card h3{overflow-wrap:anywhere}
+.contact-bottom .email{overflow-wrap:anywhere}
+@media(max-width:700px){
+  .hero-actions{flex-wrap:wrap;gap:14px 20px}
+  .hero .button,.hero .play-link{font-size:15px;min-height:44px}
+  .section-top>p,.skill-groups p{font-size:16px!important;line-height:1.65}
+  .filters button,.gallery-view button{font-size:14px!important;min-height:44px}
+  .viewer-tools a{font-size:13px;display:inline-flex;align-items:center}
+  .viewer-navigation>span,.viewer-zoom>span{font-size:12px}
+  .reel-controls{flex-wrap:wrap;gap:6px 8px;padding:8px 10px}
+  .reel-controls #reel-seek{min-width:70px;flex:1 1 100%;order:5}
+  .reel-controls #reel-mute,.reel-controls #reel-fullscreen{min-width:44px}
+  .film-caption{flex-wrap:wrap;gap:6px 16px}
+}
+@media(pointer:coarse){.cursor-orbit{display:none!important}.project-visual{will-change:auto}}
+@media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}}
+:root[data-motion=reduced]{scroll-behavior:auto}
